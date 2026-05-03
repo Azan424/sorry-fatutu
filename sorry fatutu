@@ -1,0 +1,197 @@
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Heart } from "lucide-react";
+import { useState, useEffect } from "react";
+
+export default function UltimateRomanticWebsite() {
+  const [showFireworks, setShowFireworks] = useState(false);
+  const [forgiven, setForgiven] = useState(false);
+  const [text, setText] = useState("");
+
+  // Password protection
+  const correctPassword = "ilovefatutu";
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [unlocked, setUnlocked] = useState(false);
+
+  const message = "Fatutu… I love you more than words can ever explain.";
+
+  useEffect(() => {
+    if (!unlocked) return;
+    let i = 0;
+    const interval = setInterval(() => {
+      setText(message.slice(0, i + 1));
+      i++;
+      if (i === message.length) clearInterval(interval);
+    }, 60);
+    return () => clearInterval(interval);
+  }, [unlocked]);
+
+  // PASSWORD SCREEN
+  if (!unlocked) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-300 via-rose-200 to-purple-300">
+        <Card className="p-10 text-center rounded-2xl shadow-2xl bg-white/90">
+          <CardContent className="space-y-6">
+            <h1 className="text-4xl font-bold text-pink-600">Private Message ❤️</h1>
+            <p className="text-gray-700">Only Fatutu can open this surprise 💖</p>
+
+            <input
+              type="password"
+              placeholder="Enter Secret Password"
+              value={enteredPassword}
+              onChange={(e) => setEnteredPassword(e.target.value)}
+              className="border rounded-xl p-3 w-full text-center"
+            />
+
+            <Button
+              onClick={() => {
+                if (enteredPassword === correctPassword) {
+                  setUnlocked(true);
+                } else {
+                  alert("Wrong password 💔");
+                }
+              }}
+              className="bg-pink-500 hover:bg-pink-600 text-white rounded-xl"
+            >
+              Unlock My Heart 🔐
+            </Button>
+
+            <p className="text-sm text-gray-500">Password hint: ilovefatutu</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-pink-300 via-rose-200 to-purple-300 flex items-center justify-center p-6">
+
+      {/* Romantic Music */}
+      <audio autoPlay loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9a1d7d.mp3?filename=romantic-love-11786.mp3" type="audio/mpeg" />
+      </audio>
+
+      {/* Floating Hearts */}
+      {[...Array(25)].map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{ y: "100vh", opacity: 0 }}
+          animate={{ y: "-10vh", opacity: 1 }}
+          transition={{ duration: 8 + i, repeat: Infinity, delay: i * 0.3 }}
+          className="absolute text-pink-500"
+          style={{ left: `${Math.random() * 100}%` }}
+        >
+          <Heart size={26} />
+        </motion.div>
+      ))}
+
+      {/* Fireworks */}
+      {showFireworks && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          {[...Array(40)].map((_, i) => (
+            <motion.div
+              key={i}
+              initial={{ scale: 0, opacity: 1 }}
+              animate={{
+                scale: 1.5,
+                opacity: 0,
+                x: Math.random() * 800 - 400,
+                y: Math.random() * 800 - 400,
+              }}
+              transition={{ duration: 1.5 }}
+              className="absolute text-4xl"
+            >
+              🎆
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* Proposal Screen */}
+      {forgiven && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute inset-0 flex flex-col items-center justify-center bg-pink-200/90 text-center p-8"
+        >
+          <motion.h1
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1 }}
+            className="text-5xl font-bold text-pink-700 mb-6"
+          >
+            Thank You Fatutu ❤️
+          </motion.h1>
+
+          <p className="text-xl text-gray-700 max-w-xl">
+            You make my life beautiful. I promise to love you, respect you,
+            and cherish every moment with you forever.
+          </p>
+
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="text-6xl mt-8"
+          >
+            💍💖✨
+          </motion.div>
+        </motion.div>
+      )}
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+        className="max-w-4xl w-full"
+      >
+        <Card className="rounded-2xl shadow-2xl backdrop-blur bg-white/80">
+          <CardContent className="p-10 text-center space-y-8">
+            <h1 className="text-5xl font-bold text-pink-600">
+              I'm Truly Sorry, Fatutu ❤️
+            </h1>
+
+            <p className="text-xl text-gray-700 min-h-[40px] font-medium">
+              {text}
+            </p>
+
+            <p className="text-lg text-gray-700 leading-relaxed">
+              My dearest Fatutu, I never want to be the reason behind your
+              tears. You are my happiness, my peace, my safe place, and my
+              forever person. I promise to grow, to understand you better,
+              and to love you in ways that make your heart feel secure every
+              single day.
+            </p>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {[1, 2, 3, 4, 5, 6].map((item) => (
+                <motion.img
+                  key={item}
+                  src={`https://picsum.photos/400/400?random=${item}`}
+                  alt="memory"
+                  whileHover={{ scale: 1.08 }}
+                  className="rounded-2xl shadow-lg"
+                />
+              ))}
+            </div>
+
+            <p className="text-md text-gray-600">
+              Fatutu, you are my dream, my soulmate, my best friend, and my
+              heart’s home. I love you endlessly and always will.
+            </p>
+
+            <Button
+              onClick={() => {
+                setShowFireworks(true);
+                setForgiven(true);
+                setTimeout(() => setShowFireworks(false), 2500);
+              }}
+              className="bg-pink-500 hover:bg-pink-600 text-white text-xl px-10 py-5 rounded-2xl shadow-xl"
+            >
+              Fatutu, Please Forgive Me 💕
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </div>
+  );
+}

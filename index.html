@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sorry Fatutu ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #dda0dd);
+}
+
+/* Center box */
+.container {
+  text-align: center;
+  padding: 40px;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 80px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  color: pink;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Fireworks */
+.firework {
+  position: absolute;
+  font-size: 30px;
+  animation: explode 1.5s ease-out forwards;
+}
+
+@keyframes explode {
+  from { transform: scale(0); opacity: 1; }
+  to { transform: scale(2); opacity: 0; }
+}
+
+button {
+  padding: 15px 30px;
+  background: hotpink;
+  border: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9a1d7d.mp3?filename=romantic-love-11786.mp3">
+</audio>
+
+<!-- PASSWORD SCREEN -->
+<div id="lock" class="container">
+  <h1>🔐 Private Love Message</h1>
+  <p>Only Fatutu can open this ❤️</p>
+  <input type="password" id="pass" placeholder="Enter password">
+  <br><br>
+  <button onclick="checkPass()">Unlock 💖</button>
+  <p style="font-size:12px;">Hint: ilovefatutu</p>
+</div>
+
+<!-- MAIN PAGE -->
+<div id="main" class="container" style="display:none;">
+  <h1>I'm Truly Sorry, Fatutu ❤️</h1>
+
+  <p>
+    My love Fatutu, I am really sorry.  
+    You are my happiness, my peace, my everything.  
+    I promise to always love you and never hurt you again. 💖
+  </p>
+
+  <h2 id="typing"></h2>
+
+  <button onclick="forgive()">Fatutu, Please Forgive Me 💕</button>
+</div>
+
+<script>
+// PASSWORD
+function checkPass(){
+  let p = document.getElementById("pass").value;
+  if(p === "ilovefatutu"){
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    startHearts();
+    typeMessage();
+  } else {
+    alert("Wrong password 💔");
+  }
+}
+
+// FLOATING HEARTS
+function startHearts(){
+  setInterval(() => {
+    let h = document.createElement("div");
+    h.innerHTML = "💖";
+    h.className = "heart";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = Math.random()*20 + 20 + "px";
+    document.body.appendChild(h);
+
+    setTimeout(() => {
+      h.remove();
+    }, 6000);
+  }, 300);
+}
+
+// TYPING EFFECT
+let text = "Fatutu… I love you more than words can say 💖";
+let i = 0;
+
+function typeMessage(){
+  let el = document.getElementById("typing");
+  let interval = setInterval(() => {
+    el.innerHTML += text[i];
+    i++;
+    if(i >= text.length) clearInterval(interval);
+  }, 80);
+}
+
+// FIREWORKS
+function forgive(){
+  for(let i=0;i<30;i++){
+    let f = document.createElement("div");
+    f.innerHTML = "🎆";
+    f.className = "firework";
+    f.style.left = Math.random()*100 + "vw";
+    f.style.top = Math.random()*100 + "vh";
+    document.body.appendChild(f);
+
+    setTimeout(() => {
+      f.remove();
+    }, 1500);
+  }
+
+  alert("Thank you Fatutu ❤️");
+}
+</script>
+
+</body>
+</html>
